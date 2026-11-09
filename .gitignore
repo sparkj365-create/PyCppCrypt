@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+
+# Native build products
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
+*.exe
+
+# Secrets and generated encrypted data
+*.key.json
+keys/
+*.pcc
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
