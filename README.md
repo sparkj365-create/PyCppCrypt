@@ -159,3 +159,20 @@ The tests cover:
 ## License
 
 MIT License.
+
+## Test results
+
+Output of `pytest -v` from GitHub Actions (Python 3.12):
+
+```text
+tests/test_files.py::test_binary_container_roundtrip PASSED              [ 11%]
+tests/test_files.py::test_password_protected_key_file PASSED             [ 22%]
+tests/test_tampering.py::test_modified_ciphertext_is_rejected PASSED     [ 33%]
+tests/test_tampering.py::test_modified_authenticated_header_is_rejected PASSED [ 44%]
+tests/test_tampering.py::test_wrong_key_password_is_rejected PASSED      [ 55%]
+tests/test_text.py::test_text_roundtrip[] PASSED                         [ 66%]
+tests/test_text.py::test_text_roundtrip[hello] PASSED                    [ 77%]
+tests/test_text.py::test_text_roundtrip[\xd9\x85\xd8\xaa\xd9\x86 \xd9\x81\xd8\xa7\xd8\xb1\xd8\xb3\xdb\x8c \xf0\x9f\x94\x90] PASSED [ 88%]
+tests/test_text.py::test_cpp_and_python_interoperate PASSED              [100%]
+============================== 9 passed in 0.28s ===============================
+```
