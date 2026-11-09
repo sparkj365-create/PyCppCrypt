@@ -1,5 +1,7 @@
 # 🔐 PyCppCrypt
 
+[![CI](https://github.com/sparkj365-create/PyCppCrypt/actions/workflows/ci.yml/badge.svg)](https://github.com/sparkj365-create/PyCppCrypt/actions)
+
 A command-line AES-256-GCM encryption project that combines a Python interface with a C++17/OpenSSL cryptographic core.
 
 > **Educational alpha software.** Review and audit it before using it for valuable or irreplaceable data. Always keep backups.
