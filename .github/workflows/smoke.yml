@@ -1,0 +1,22 @@
+name: CLI smoke test
+on: workflow_dispatch
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    env:
+      PCC_PW: ci-test-password
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get update && sudo apt-get install -y cmake libssl-dev
+      - run: python -m pip install --upgrade pip && python -m pip install -e ".[dev]"
+      - run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release
+      - run: pycppcrypt keygen --out keys/main.key.json --password-env PCC_PW
+      - run: head -c 100000 /dev/urandom > photo.bin
+      - run: pycppcrypt encrypt-file photo.bin photo.bin.pcc --key keys/main.key.json --password-env PCC_PW --fast
+      - run: pycppcrypt decrypt-file photo.bin.pcc restored.bin --key keys/main.key.json --password-env PCC_PW --fast
+      - run: cmp photo.bin restored.bin && echo "C++ round trip OK"
+      - run: pycppcrypt decrypt-file photo.bin.pcc restored-py.bin --key keys/main.key.json --password-env PCC_PW --python
+      - run: cmp photo.bin restored-py.bin && echo "Python backend interop OK"
